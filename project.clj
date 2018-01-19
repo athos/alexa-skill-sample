@@ -1,6 +1,22 @@
 (defproject alexa-skill-sample "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A sample project to develop an Alexa Skill in ClojureScript"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]])
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]]
+
+  :plugins [[lein-cljsbuild "1.1.7"]]
+
+  :cljsbuild {:builds
+              [{:id "app"
+                :source-paths ["src"]
+                :compiler {:output-to "target/app/alexa_skill_sample.js"
+                           :output-dir "target/app"
+                           :main alexa-skill-sample.main
+                           :optimizations :none
+                           :target :nodejs
+                           :npm-deps {:alexa-sdk "^1.0.25"}
+                           :install-deps true}}]}
+
+  :profiles {:dev {:dependencies [[com.cemerick/piggieback "0.2.2"]]}}
+  )
