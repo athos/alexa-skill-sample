@@ -13,7 +13,7 @@
                 :compiler {:output-to "target/app/alexa_skill_sample.js"
                            :output-dir "target/app"
                            :main alexa-skill-sample.main
-                           :optimizations :none
+                           :optimizations :simple
                            :target :nodejs
                            :npm-deps {:alexa-sdk "^1.0.25"}
                            :install-deps true}}]}
