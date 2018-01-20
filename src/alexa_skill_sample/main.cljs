@@ -3,7 +3,27 @@
 
 (enable-console-print!)
 
-(defn main []
-  (println "Hello, World!"))
+(def APP_ID js/undefined)
 
-(set! *main-cli-fn* main)
+(def handlers
+  {:LaunchRequest (fn [this]
+                    (.emit this ":tell" "こんにちは"))
+   :Unhandled (fn [this]
+                (.emit this ":tell" "すみません、よく分かりません。"))
+   :AMAZON.HelpIntent (fn [this]
+                        (.emit this ":tell" "ヘルプはありません"))
+   :AMAZON.CancelIntent (fn [this]
+                          (.emit this "AMAZON.StopIntent"))
+   :AMAZON.StopIntent (fn [this]
+                        (.emit this ":tell" "さようなら"))})
+
+(defn map->handlers [m]
+  (clj->js (into {} (map (fn [[k f]] [k #(this-as this (f this))])) m)))
+
+(defn main [event context callback]
+  (let [alexa (alexa/handler event context callback)]
+    (set! (.-appId alexa) APP_ID)
+    (.registerHandlers alexa (map->handlers handlers))
+    (.execute alexa)))
+
+(set! (.-handler js/exports) main)
