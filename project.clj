@@ -15,7 +15,8 @@
                            :main alexa-skill-sample.main
                            :optimizations :simple
                            :target :nodejs
-                           :npm-deps {:alexa-sdk "^1.0.25"}
+                           :npm-deps {"alexa-sdk" "^1.0.25"
+                                      "@slack/client" "3.15.0"}
                            :install-deps true}}]}
 
   :profiles {:dev {:dependencies [[com.cemerick/piggieback "0.2.2"]]}}
