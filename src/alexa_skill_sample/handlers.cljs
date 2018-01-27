@@ -1,6 +1,5 @@
 (ns alexa-skill-sample.handlers
-  (:require [alexa-skill-sample.handlers.core :as h :refer [defhandler]]
-            ["@slack/client" :as slack]))
+  (:require [alexa-skill-sample.handlers.core :as h :refer [defhandler]]))
 
 (defhandler :LaunchRequest
   (h/emit ":ask" (h/t "DESCRIPTION") ""))
