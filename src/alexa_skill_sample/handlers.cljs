@@ -1,11 +1,9 @@
 (ns alexa-skill-sample.handlers
-  (:require [alexa-skill-sample.handlers.core :as h :refer [defhandler]]))
+  (:require [alexa-skill-sample.handlers.core :as h :refer [defhandler]]
+            alexa-skill-sample.handlers.business-day))
 
 (defhandler :LaunchRequest
   (h/emit ":ask" (h/t "DESCRIPTION") ""))
-
-(defhandler :BusinessDayIntent
-  (h/emit ":ask" (h/t "BUSINESS_DAY_INSTRUCTION") ""))
 
 (defhandler :FinishIntent
   (h/emit "AMAZON.StopIntent"))
