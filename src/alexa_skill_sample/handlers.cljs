@@ -1,6 +1,7 @@
 (ns alexa-skill-sample.handlers
   (:require [alexa-skill-sample.handlers.core :as h :refer [defhandler]]
-            alexa-skill-sample.handlers.business-day))
+            alexa-skill-sample.handlers.business-day
+            alexa-skill-sample.handlers.congestion-check))
 
 (defhandler :LaunchRequest
   (h/emit ":ask" (h/t "DESCRIPTION") ""))
