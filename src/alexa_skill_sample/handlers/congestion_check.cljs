@@ -13,8 +13,8 @@
        "4. 席はほぼ満席です"))
 
 (defhandler :CongestionCheckIntent
-  (p/let [msg (slack/prompt SLACK_MESSAGE SLACK_TIMEOUT)
-          choice (some->> msg (re-matches #"[1-4]"))]
+  (p/let [choice (p/some->> (slack/prompt SLACK_MESSAGE SLACK_TIMEOUT)
+                            (re-matches #"[1-4]"))]
     (if-not choice
       (h/emit ":tell" "すみません、現在の混雑状況は分かりませんでした。しばらく待ってから再度ご確認下さい。")
       (h/emit ":tell"
