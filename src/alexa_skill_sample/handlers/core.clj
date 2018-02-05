@@ -1,5 +1,11 @@
 (ns alexa-skill-sample.handlers.core)
 
 (defmacro defhandler [intent & body]
-  `(defmethod handle-intent ~intent [_#]
-     ~@body))
+  `(do (swap! %handlers assoc ~intent #(cljs.core/this-as ~'&self ~@body))
+       ~intent))
+
+(defmacro emit [& args]
+  `(.emit ~'&self ~@args))
+
+(defmacro t [x]
+  `(.t ~'&self ~x))
